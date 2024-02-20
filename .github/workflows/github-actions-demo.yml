@@ -42,8 +42,8 @@ jobs:
           git status
           git config --global user.name "harshvardhan7395"
           git config --global user.email "harshvardhan.akhare@gmail.com"
-          echo"adding"
+          echo "adding"
           git add .
-          echo"commiting"
+          echo "commiting"
           git commit -m "added date to app file"
           git push -o ci.skip "https://harshvardhan7395:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" master
