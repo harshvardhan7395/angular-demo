@@ -46,4 +46,4 @@ jobs:
           git add .
           echo "commiting"
           git commit -m "added date to app file"
-          git push -o ci.skip "https://harshvardhan7395:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" master
+          echo "git push -o ci.skip "https://harshvardhan7395:${GIT_PUSH_TOKEN}@${CI_REPOSITORY_URL#*@}" master"
