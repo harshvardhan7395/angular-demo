@@ -15,14 +15,14 @@ jobs:
         run: ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  check-actions:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '14'
-      - run: npm install
-      - run: node -v
+#  check-actions:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/setup-node@v4
+#        with:
+#          node-version: '14'
+#      - run: npm install
+#      - run: node -v
 
   update-file-actions:
     runs-on: ubuntu-latest
@@ -35,6 +35,6 @@ jobs:
       - run: npm install
       - run: |
               ls
-              cd/src/app
+              cd src/app
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
       - run: cat app.component.html
