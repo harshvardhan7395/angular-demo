@@ -1,12 +1,10 @@
 name: GitHub Actions Demo
-on:
-  push:
-    branches:
-      - master
+on: [ push ]
+#  push:
+#    branches:
+#      - master
 jobs:
   Explore-GitHub-Actions:
-#    if_merged:
-#      if: github.event.pull_request.merged== true
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -41,6 +39,8 @@ jobs:
       - run: |
               ls
               cd src/app
+              line = sed -n '3' app.component.html
+              echo "${{line}}"
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
               cat app.component.html
       - run: |
