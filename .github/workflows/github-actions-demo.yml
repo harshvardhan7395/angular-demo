@@ -39,8 +39,7 @@ jobs:
       - run: |
               ls
               cd src/app
-              line = sed -n '3' app.component.html
-              echo "${{line}}"
+              sed -n '3' app.component.html
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
               cat app.component.html
       - run: |
