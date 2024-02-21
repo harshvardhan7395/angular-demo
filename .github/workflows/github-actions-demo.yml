@@ -46,6 +46,6 @@ jobs:
           git add .
           echo "commiting"
           git commit -m "added date to app file"
-          echo ""
+          echo "${{github.ref}}, $GITHUB_HEAD_REF, $GITHUB_REF_NAME "
           echo "git push -o ci.skip "https://${GIT_PUSH_TOKEN}@github.com/harshvardhan7395/angular-demo.git" master"
           git push -o ci.skip "https://${GIT_PUSH_TOKEN}@github.com/harshvardhan7395/angular-demo.git" master
