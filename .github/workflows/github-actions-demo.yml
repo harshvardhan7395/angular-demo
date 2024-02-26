@@ -40,13 +40,14 @@ jobs:
         run:  cd src/app
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
 
-#      
+#
         # if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
       - name: if the changelog date is present
         uses: actions/checkout@v4
       - run: |
               ls
               cd src/app
+              grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
               sed -n '3p' app.component.html
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
               cat app.component.html
