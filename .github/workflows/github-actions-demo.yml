@@ -58,11 +58,10 @@ jobs:
               ls
               cd src/app
               sed '3q;d' app.component.html
-              if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "true"];
-              then
+              if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "true"];then
                 echo "line exists"
                 exit 1
-              else
+              if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "false"];then
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
                 sed -n '3p' app.component.html
               fi
