@@ -34,13 +34,16 @@ jobs:
   update-file-actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        name: if the changelog date is present
-        if: ${{ env.val == true }}
+      - name: if the changelog date is present
+        uses: actions/checkout@v4
+      - if: ${{ env.val == true }}
         run:  cd src/app
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
 
-#        if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
+#      
+        # if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
+      - name: if the changelog date is present
+        uses: actions/checkout@v4
       - run: |
               ls
               cd src/app
