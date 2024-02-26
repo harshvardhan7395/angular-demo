@@ -3,8 +3,7 @@ on: [ push ]
 
 
 env:
-  val : $( sed -n '3p' app.component.html)
-  date: '$(date +%F)'
+  val : $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
 #  push:
 #    branches:
 #      - master
@@ -56,10 +55,10 @@ jobs:
 #        if: ${{env.action_state == 'false'}}
         run: |
               cd src/app
-              if [  $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html) == 1];then
+              if [ ${{env.val}}  == 1];then
                 echo "line exists"
                 exit 1
-              if [  $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html) == 0  ];then
+              if [   ${{env.val}}  == 0  ];then
                 sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
                 exit 1
               fi
