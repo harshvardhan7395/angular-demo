@@ -39,10 +39,11 @@ jobs:
       - run: |
               ls
               cd src/app
-        name: if the changelog date is present
 
+        name: if the changelog date is present
         if: ${{ env.val }}
-      - run: echo "line exists"
+      - run:  grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
+              echo "line exists"
 
 #        if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
       - run: |
