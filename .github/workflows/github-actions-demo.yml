@@ -58,7 +58,7 @@ jobs:
               ls
               cd src/app
               sed '3q;d' app.component.html
-              if [ grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && true || false];
+              if [ grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false" == "true"];
               then
                 echo "line exists"
                 exit 1
