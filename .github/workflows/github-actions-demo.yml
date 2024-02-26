@@ -59,7 +59,7 @@ jobs:
 
       - name: Push the code
         run: |
-          echo "${{env.action_state}}"
+          echo "env.action_state"
           git status
           git config --global user.name "harshvardhan7395"
           git config --global user.email "harshvardhan.akhare@gmail.com"
