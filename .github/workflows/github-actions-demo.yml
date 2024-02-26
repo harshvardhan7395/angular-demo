@@ -57,13 +57,11 @@ jobs:
         run: |
               ls
               cd src/app
-              sed '3q;d' app.component.html
-              if [  grep -qF "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
+              if [  $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html) == 1];then
                 echo "line exists"
                 exit 1
-              if [   grep -qF "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html  ];then
-                grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
-                sed -n '3p' app.component.html
+              if [  $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html) == 0  ];then
+                sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
                 exit 1
               fi
         shell: bash
