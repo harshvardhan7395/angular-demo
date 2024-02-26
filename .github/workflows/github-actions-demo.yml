@@ -5,6 +5,7 @@ on: [ push ]
 env:
   val : $( sed -n '3p' app.component.html)
   date: '$(date +%F)'
+  action_state: true
 #  push:
 #    branches:
 #      - master
