@@ -40,6 +40,7 @@ jobs:
         uses: actions/checkout@v4
       - run:
             cd src/app
+            sed '3q;d' app.component.html
             grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "action_state='true'">> "$GITHUB_ENV" || echo "action_state='false'">> "$GITHUB_ENV"
 
   update-file-actions:
@@ -55,13 +56,13 @@ jobs:
         run: |
               ls
               cd src/app
-              if [[ sed -n '3p' app.component.html == "<h2>{{'$(date +%F)' | date}}</h2>"]]
+              if [ sed -n '3p' app.component.html == "<h2>{{'$(date +%F)' | date}}</h2>"];
               then
                 echo "line exists"
                 exit 1
               else
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
-                sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
+#                sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
                 sed -n '3p' app.component.html
               fi
         shell: bash
