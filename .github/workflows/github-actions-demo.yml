@@ -1,5 +1,9 @@
 name: GitHub Actions Demo
 on: [ push ]
+
+
+env:
+  val : $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
 #  push:
 #    branches:
 #      - master
@@ -36,7 +40,8 @@ jobs:
               ls
               cd src/app
         name: if the changelog date is present
-        if: ${{grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html}}
+
+        if: ${{ val == true}}
       - run: echo "line exists"
 
 #        if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
