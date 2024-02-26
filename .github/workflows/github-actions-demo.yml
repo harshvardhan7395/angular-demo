@@ -43,8 +43,7 @@ jobs:
         uses: actions/checkout@v4
       - run:
             cd src/app
-            sed '3q;d' app.component.html
-            grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html
+            grep -Fxq "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html
 
   update-file-actions:
     needs: check-if-date-exists
