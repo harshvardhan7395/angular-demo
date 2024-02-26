@@ -5,7 +5,6 @@ on: [ push ]
 env:
   val : $( sed -n '3p' app.component.html)
   date: '$(date +%F)'
-  action_state: true
 #  push:
 #    branches:
 #      - master
@@ -36,13 +35,16 @@ jobs:
 
   check-if-date-exists:
     runs-on: ubuntu-latest
+    outputs:
+      exists: ${{steps.check-if-exists.outputs.exists}}
     steps:
       - name: If changelog date is present
+        id: check-if-exists
         uses: actions/checkout@v4
       - run:
             cd src/app
             sed '3q;d' app.component.html
-            grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "action_state='true'">> "$GITHUB_ENV" || echo "action_state='false'">> "$GITHUB_ENV"
+            grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "action_state='true'">> "$GITHUB_OUTPUT" || echo "action_state='false'">> "$GITHUB_OUTPUT"
 
   update-file-actions:
     needs: check-if-date-exists
@@ -58,10 +60,10 @@ jobs:
               ls
               cd src/app
               sed '3q;d' app.component.html
-              if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "true"];then
+              if [ $(needs.check-if-date-exists.output.exists) == "true"];then
                 echo "line exists"
                 exit 1
-              if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "false"];then
+              if [ $(needs.check-if-date-exists.output.exists) == "false"];then
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
                 sed -n '3p' app.component.html
                 exit 1
