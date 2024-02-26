@@ -55,7 +55,6 @@ jobs:
       - name: add the changelog date
 #        if: ${{env.action_state == 'false'}}
         run: |
-              ls
               cd src/app
               if [  $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html) == 1];then
                 echo "line exists"
