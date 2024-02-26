@@ -64,6 +64,7 @@ jobs:
               if [ $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "true" || echo "false") == "false"];then
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
                 sed -n '3p' app.component.html
+                exit 1
               fi
         shell: bash
 
