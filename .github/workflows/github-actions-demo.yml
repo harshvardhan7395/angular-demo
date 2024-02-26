@@ -33,17 +33,17 @@ jobs:
 #      - run: node -v
 #                sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
 
-  check-if-date-exists:
-    runs-on: ubuntu-latest
-    outputs:
-      exists: ${{steps.check-if-exists.outputs.exists}}
-    steps:
-      - name: If changelog date is present
-        id: check-if-exists
-        uses: actions/checkout@v4
-      - run:
-            cd src/app
-            grep -Fxq '<h2>{{'$(date +%F)' | date}}</h2>' "app.component.html"
+#  check-if-date-exists:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      exists: ${{steps.check-if-exists.outputs.exists}}
+#    steps:
+#      - name: If changelog date is present
+#        id: check-if-exists
+#        uses: actions/checkout@v4
+#      - run:
+#            cd src/app
+#            grep -Fxq '<h2>{{'$(date +%F)' | date}}</h2>' "app.component.html"
 
   update-file-actions:
     needs: check-if-date-exists
@@ -59,10 +59,10 @@ jobs:
               ls
               cd src/app
               sed '3q;d' app.component.html
-              if [  grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
+              if [  grep -qF "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
                 echo "line exists"
                 exit 1
-              if [  grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
+              if [   grep -qF "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html  ];then
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
                 sed -n '3p' app.component.html
                 exit 1
