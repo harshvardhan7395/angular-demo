@@ -44,7 +44,7 @@ jobs:
       - run:
             cd src/app
             sed '3q;d' app.component.html
-            grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "action_state='true'">> "$GITHUB_OUTPUT" || echo "action_state='false'">> "$GITHUB_OUTPUT"
+            grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html
 
   update-file-actions:
     needs: check-if-date-exists
@@ -60,10 +60,10 @@ jobs:
               ls
               cd src/app
               sed '3q;d' app.component.html
-              if [ $(needs.check-if-date-exists.output.exists) == "true"];then
+              if [  grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
                 echo "line exists"
                 exit 1
-              if [ $(needs.check-if-date-exists.output.exists) == "false"];then
+              if [  grep -F "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html ];then
                 grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
                 sed -n '3p' app.component.html
                 exit 1
