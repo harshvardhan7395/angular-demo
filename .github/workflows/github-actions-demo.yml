@@ -39,7 +39,7 @@ jobs:
         if: grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html
       - run: echo "line exists"
 
-        if: !grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html
+        if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
       - run: |
               ls
               cd src/app
