@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: add the changelog date
-        if: ${{env.action_state == 'true'}}
+        if: ${{env.action_state == 'false'}}
         run: |
               ls
               cd src/app
