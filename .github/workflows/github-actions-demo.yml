@@ -1,7 +1,5 @@
 name: GitHub Actions Demo
 on: [ push ]
-
-
 env:
   val : $(grep -c "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
 #  push:
