@@ -3,7 +3,7 @@ on: [ push ]
 
 
 env:
-  val : $(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
+  val : $( sed -n '3p' app.component.html)
 #  push:
 #    branches:
 #      - master
@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: if the changelog date is present
         uses: actions/checkout@v4
-      - if: ${{ env.val == true }}
+      - if: ${{ env.val == "<h2>{{'$(date +%F)' | date}}</h2>" }}
         run:  cd src/app
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
 
@@ -48,7 +48,7 @@ jobs:
               ls
               cd src/app
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
-              sed -n '3p' app.component.html
+#              sed -n '3p' app.component.html
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
               cat app.component.html
       - run: |
