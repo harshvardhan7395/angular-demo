@@ -34,15 +34,10 @@ jobs:
   update-file-actions:
     runs-on: ubuntu-latest
     steps:
-      - name: check out repo
-        uses: actions/checkout@v4
-      - run: |
-              ls
-              cd src/app
-
+      - uses: actions/checkout@v4
         name: if the changelog date is present
         if: ${{ env.val == true }}
-      - run:  cd src/app
+        run:  cd src/app
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
 
 #        if: !(grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html)
