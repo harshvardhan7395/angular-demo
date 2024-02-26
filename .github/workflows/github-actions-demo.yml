@@ -55,9 +55,15 @@ jobs:
         run: |
               ls
               cd src/app
+            if [ sed -n '3p' app.component.html == "<h2>{{'$(date +%F)' | date}}</h2>"];then
+              echo "line exists"
+              exit 1
+            else
               grep -q "<h2>{{'$(date +%F)' | date}}</h2>" app.component.html && echo "yes" || echo "no"
               sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html
               sed -n '3p' app.component.html
+            fi
+        shell: bash
 
       - name: Push the code
         run: |
