@@ -54,11 +54,11 @@ jobs:
               cd src/app
               if [ ${{env.val}}  == 1];then
                 echo "line exists";
-                exit 1;
+                done;
               if [   ${{env.val}}  == 0  ];then
                 sed -i "3 i <h2>{{'$(date +%F)' | date}}</h2>" app.component.html;
-                exit 1;
-       
+                done;
+
 
       - name: Push the code
         run: |
